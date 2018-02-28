@@ -301,42 +301,6 @@
         "TreatMissingData" : "notBreaching"
       }
     },
-    "CloudTrailConfigChangesMetricFilter": {
-      "Type": "AWS::Logs::MetricFilter",
-      "Properties": {
-        "LogGroupName": {
-          "Ref": "LogGroupName"
-        },
-        "FilterPattern": "{ ($.eventName = CreateTrail) || ($.eventName = UpdateTrail) || ($.eventName = DeleteTrail) || ($.eventName = StartLogging) || ($.eventName = StopLogging) }",
-        "MetricTransformations": [
-          {
-            "MetricName": "CloudTrailConfigChanges",
-            "MetricNamespace": "CloudTrailMetrics",
-            "MetricValue": "1"
-          }
-        ]
-      }
-    },
-    "CloudTrailConfigChangesAlarm": {
-      "Type": "AWS::CloudWatch::Alarm",
-      "Properties": {
-        "AlarmName": "CloudTrailConfigChanges",
-        "AlarmDescription": "Alarm for CloudTrail Configuration Changes.",
-        "AlarmActions": [
-          {
-            "Ref": "AlarmNotificationTopic"
-          }
-        ],
-        "MetricName": "CloudTrailConfigChanges",
-        "Namespace": "CloudTrailMetrics",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "EvaluationPeriods": "1",
-        "Period": "300",
-        "Statistic": "Sum",
-        "Threshold": "1",
-        "TreatMissingData" : "notBreaching"
-      }
-    },
     "AuthorizationFailuresMetricFilter": {
       "Type": "AWS::Logs::MetricFilter",
       "Properties": {
